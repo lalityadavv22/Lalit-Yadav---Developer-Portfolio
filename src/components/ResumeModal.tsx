@@ -14,16 +14,12 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
   };
 
   const handleDownload = () => {
-    const content = getLalitResumeText();
-    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
-    link.href = url;
-    link.download = `Lalit_Yadav_Resume.txt`;
+    link.href = getLalitResumePdfPath();
+    link.download = 'Lalit_Yadav_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    URL.revokeObjectURL(url);
   };
 
   return (
@@ -47,7 +43,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
             <button
               onClick={handleDownload}
               className="glass-button p-2.5 rounded-full text-white/80 hover:text-white cursor-pointer"
-              title="Download Resume (.txt)"
+              title="Download Resume (PDF)"
             >
               <Download className="w-4 h-4" />
             </button>
@@ -198,13 +194,20 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
 
               <div>
                 <div className="flex flex-wrap justify-between items-baseline gap-2">
-                  <span className="text-white font-semibold">
-                    ❖ Money Transfer System
-                  </span>
-                  <span className="text-xs text-white/50 font-mono">Python · SQL · Web</span>
+                  <span className="text-white font-semibold">❖ PayShield</span>
+                  <span className="text-xs text-white/50 font-mono">React · TypeScript · Gemini Vision</span>
                 </div>
                 <p className="mt-1 leading-relaxed text-white/70">
-                  Designed a secure P2P transaction system with SQL-backed ledger, input sanitisation, and role-based access control – reducing manual reconciliation effort.
+                  Checks UPI payment screenshots for signs of editing and guides users to verify payments in their banking app.
+                </p>
+              </div>
+              <div>
+                <div className="flex flex-wrap justify-between items-baseline gap-2">
+                  <span className="text-white font-semibold">❖ TripCheck</span>
+                  <span className="text-xs text-white/50 font-mono">React · TypeScript · Node.js</span>
+                </div>
+                <p className="mt-1 leading-relaxed text-white/70">
+                  Full-stack travel planner for itineraries, bookings, budgets, and destination discovery.
                 </p>
               </div>
             </div>
@@ -228,38 +231,6 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
   );
 };
 
-function getLalitResumeText(): string {
-  return `LALIT YADAV
-lalityadavl420@gmail.com | (+91) 7206724591
-github.com/lalityadavv22 | linkedin.com/in/lalit-yadav-823349327/
-
-SKILLS
-❖ Languages: Java, JavaScript, Python
-❖ Tools & Frameworks: Node.js, Firebase, Git, Jupyter Notebook, Google Colab, VS Code
-❖ Concepts: Data Structures, Database Management, OOP, System designing, Algorithms
-
-EDUCATION
-❖ B.Tech CSE | Gurugram University | 2023 – 2027 (Expected)
-❖ XII (CBSE) | Vivekanand Sr. Sec. School, Dharuhera | 2023
-
-INTERNSHIPS
-❖ Ethical Hacking & Penetration Testing Intern | C-DAC, NOIDA | (Jun – August 2025)
-- Executed penetration testing on simulated environments under MeitY’s Cyber Gyan Project – mastered network vulnerability scanning, ethical hacking methodology, and threat analysis.
-- Assessed system vulnerabilities and applied secure evaluation frameworks – skills directly applicable to cybersecurity and cloud security roles.
-
-❖ AI & Data Analytics Intern | AICTE × Shell × Edunet Foundation | (Jun – July 2025)
-- Built end-to-end data analytics pipelines in Python; applied supervised learning models to industry-relevant datasets as part of Skills4Future program deliverables.
-
-ACADEMIC PROJECTS
-❖ CrickAI — AI-Powered Cricket Training System | Node.js · Firebase · Ollama LLM
-- Engineered an LLM-driven coaching assistant (Ollama) with real-time Firebase backend, enabling natural-language training feedback for players and coaches. Deployed cross-platform mobile interface via Antigravity framework.
-
-❖ Money Transfer System | Python · SQL · Web
-- Designed a secure P2P transaction system with SQL-backed ledger, input sanitisation, and role-based access control – reducing manual reconciliation effort.
-
-ACHIEVEMENTS / CERTIFICATIONS
-● CS50x: Introduction to Computer Science | Harvard University (Jun – Aug 2024)
-● Ethical Hacking & Penetration Testing | C-DAC, NOIDA – Cyber Gyan Project (2025)
-● AI & Data Analytics | AICTE × Shell × Edunet Foundation – Skills4Future (2025)
-`;
+function getLalitResumePdfPath(): string {
+  return '/Lalit_Yadav_Resume.pdf';
 }

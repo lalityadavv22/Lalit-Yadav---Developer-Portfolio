@@ -12,6 +12,7 @@ export interface Project {
   tech: string[];
   github: string;
   live?: string;
+  video?: string;
   highlight?: string;
 }
 
@@ -40,21 +41,41 @@ export const ProjectsSection: React.FC = () => {
       highlight: 'Local LLM & Real-Time Telemetry',
     },
     {
-      id: 'money-transfer-system',
-      title: 'Money Transfer System',
-      category: 'FINTECH & SECURITY',
+      id: 'payshield',
+      title: 'PayShield',
+      category: 'PAYMENT SECURITY',
       categoryFilter: 'security',
       description:
-        'Designed a secure peer-to-peer transaction system with an SQL-backed ledger, comprehensive input sanitisation, and role-based access control (RBAC) – reducing manual reconciliation effort and ensuring atomic balance integrity.',
+        'A UPI screenshot checker that looks for signs of editing and highlights what to verify next. It cannot confirm that money has reached an account.',
       features: [
-        'Atomic SQL-backed ledger guaranteeing zero transaction loss and double-entry balance verification',
-        'Multi-factor role-based permissions (RBAC) isolating standard users from administrative auditing logs',
-        'Cryptographically signed tokens and parameterized queries shielding against injection vectors',
-        'Real-time account balance updates with live transaction confirmation receipts',
+        'Analyzes uploaded UPI receipt screenshots for signs of editing',
+        'Uses Gemini vision when configured, with built-in heuristics as a fallback',
+        'Reminds users to verify actual credits in their banking app',
       ],
-      tech: ['Python', 'SQL Ledger', 'Node.js', 'RBAC Security', 'JWT Auth', 'Web Architecture'],
-      github: 'https://github.com/lalityadavv22',
-      highlight: 'Atomic SQL Ledger & RBAC',
+      tech: ['React', 'TypeScript', 'Express', 'Gemini Vision', 'Vite'],
+      github: 'https://github.com/lalityadavv22/PayShield',
+      live: 'https://pay-shield-mu.vercel.app/',
+      video: '/videos/payshield.mp4',
+      highlight: 'UPI Screenshot Verification',
+    },
+    {
+      id: 'tripcheck',
+      title: 'TripCheck',
+      category: 'TRAVEL PLANNING',
+      categoryFilter: 'backend',
+      description:
+        'A full-stack travel planner for building itineraries, managing trip details, and exploring destinations.',
+      features: [
+        'Create day-by-day itineraries and reorder trip stops',
+        'Manage bookings, budgets, packing lists, and trip notes',
+        'Search destinations and open map directions',
+        'Generate AI-assisted trip plans when the server is configured',
+      ],
+      tech: ['React', 'TypeScript', 'Node.js', 'Express', 'Vite'],
+      github: 'https://github.com/lalityadavv22/Tripcheck.2',
+      live: 'https://tripcheck-2.vercel.app/',
+      video: '/videos/tripcheck.mp4',
+      highlight: 'Full-Stack Travel Planner',
     },
     {
       id: 'data-analytics-pipeline',
@@ -115,6 +136,7 @@ export const ProjectsSection: React.FC = () => {
   const categories = [
     { id: 'all', label: 'All Projects' },
     { id: 'ai', label: 'AI & Data Science' },
+    { id: 'backend', label: 'Full-Stack & Web' },
     { id: 'security', label: 'Security & Systems' },
   ];
 
@@ -255,6 +277,20 @@ export const ProjectsSection: React.FC = () => {
                       <span>Source Repository</span>
                     </a>
 
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noreferrer"
+                        data-cursor="Live Demo"
+                        onMouseEnter={() => soundFx.playHover()}
+                        className="flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-2 font-mono text-[11px] uppercase tracking-wider text-emerald-300 transition-all duration-300 hover:bg-emerald-400 hover:text-black active:scale-95 cursor-pointer"
+                      >
+                        <ExternalLink size={13} />
+                        <span>Live Demo</span>
+                      </a>
+                    )}
+
                     <button
                       type="button"
                       onClick={() => {
@@ -273,6 +309,21 @@ export const ProjectsSection: React.FC = () => {
 
                 {/* Right Column: High-tech Media/Architecture Preview */}
                 <div className="col-span-1 md:col-span-5">
+                  {project.video ? (
+                    <video
+                      className="aspect-video w-full rounded-2xl border border-white/[0.08] bg-black object-cover shadow-2xl"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      controls
+                      preload="metadata"
+                      aria-label={`${project.title} project video`}
+                    >
+                      <source src={project.video} type="video/mp4" />
+                      Your browser does not support HTML video.
+                    </video>
+                  ) : (
                   <div
                     role="button"
                     tabIndex={0}
@@ -339,6 +390,7 @@ export const ProjectsSection: React.FC = () => {
                       </span>
                     </div>
                   </div>
+                  )}
                 </div>
               </div>
             </article>
